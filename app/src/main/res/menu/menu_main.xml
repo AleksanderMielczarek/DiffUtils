@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_fast_adapter"
+        android:enabled="true"
+        android:icon="@drawable/ic_format_list_bulleted_black_24dp"
+        android:title="@string/fast_adapter"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_binding"
+        android:enabled="true"
+        android:icon="@drawable/ic_format_list_bulleted_black_24dp"
+        android:title="@string/binding"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_sdk"
+        android:enabled="true"
+        android:icon="@drawable/ic_format_list_bulleted_black_24dp"
+        android:title="@string/sdk"
+        app:showAsAction="ifRoom" />
+
+</menu>

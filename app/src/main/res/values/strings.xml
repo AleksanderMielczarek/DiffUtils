@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">DiffUtils</string>
+    <string name="fast_adapter">FastAdapter</string>
+    <string name="binding">Binding</string>
+    <string name="sdk">Sdk</string>
+    <string name="shuffle_id">Shuffle id</string>
+    <string name="shuffle_no_id">Shuffle no id</string>
+</resources>

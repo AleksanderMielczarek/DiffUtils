@@ -1,0 +1,26 @@
+apply from: 'dependencies.gradle'
+apply plugin: 'com.github.ben-manes.versions'
+
+buildscript {
+    apply from: 'dependencies.gradle'
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$toolsVersion"
+        classpath "com.github.ben-manes:gradle-versions-plugin:$versionsVersion"
+        classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:$dexcountVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://maven.google.com" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

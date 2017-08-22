@@ -1,0 +1,42 @@
+ext {
+    //app
+    versionMajor = 1
+    versionMinor = 0
+    versionFix = 0
+
+    //kotlin
+    kotlinVersion = '1.1.4-2'
+
+    //tools
+    minSdkVersionVersion = 19
+    sdkVersion = 26
+    buildToolsVersionVersion = "26.0.1"
+
+    //plugins
+    toolsVersion = '2.3.3'
+    versionsVersion = '0.15.0'
+    dexcountVersion = '0.7.3'
+
+    //test
+    espressoCoreVersion = '3.0.0'
+    junitVersion = '4.12'
+    mockitoVersion = '2.8.47'
+    mockitokotlinVersion = '1.5.0'
+
+    //support
+    supportLibraryVersion = '26.0.1'
+
+    //kodein
+    kodeinVersion = '4.1.0'
+
+    //rx
+    rxandroidVersion = '2.0.1'
+    rxjavaVersion = '2.1.3'
+    rxkotlinVersion = '2.1.0'
+    rxbindingVersion = '2.0.0'
+
+    //utils
+    fastadapterVersion = '2.6.3@aar'
+    ankoVersion = '0.10.1'
+    bindingcollectionadapterVersion = '2.1.0'
+}
