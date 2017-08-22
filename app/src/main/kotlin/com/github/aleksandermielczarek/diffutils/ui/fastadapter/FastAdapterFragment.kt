@@ -72,8 +72,18 @@ class FastAdapterFragment : DiffUtilFragment() {
         }
 
         adapter.mapPossibleTypes(items)
+
         val oldItems = mutableListOf<Item>()
         oldItems.addAll(adapter.adapterItems)
+
+        if (items !== adapter.adapterItems) {
+            if (!adapter.adapterItems.isEmpty()) {
+                adapter.adapterItems.clear()
+            }
+
+            adapter.adapterItems.addAll(items)
+        }
+
         val result = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
             override fun getOldListSize(): Int = oldItems.size
 
@@ -90,13 +100,6 @@ class FastAdapterFragment : DiffUtilFragment() {
                 return result ?: super.getChangePayload(oldItemPosition, newItemPosition)
             }
         }, detectMoves)
-        //if (items != adapter.adapterItems) {
-        if (!adapter.adapterItems.isEmpty()) {
-            adapter.adapterItems.clear()
-        }
-
-        adapter.adapterItems.addAll(items)
-        //}
 
         result.dispatchUpdatesTo(object : ListUpdateCallback {
             override fun onInserted(position: Int, count: Int) {
