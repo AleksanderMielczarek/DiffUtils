@@ -29,7 +29,7 @@ abstract class DiffUtilFragment : Fragment() {
 
     private val kodein = LazyKodein(appKodein)
     private val generator: Generator by kodein.instance()
-    protected val disposables = CompositeDisposable()
+    private val disposables = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,12 +37,12 @@ abstract class DiffUtilFragment : Fragment() {
 
         generator.idEntities.subscribeBy {
             Toast.makeText(activity, R.string.shuffle_id, Toast.LENGTH_SHORT).show()
-            diffUtilId(it)
+            setDiffUtilId(it)
         }.addTo(disposables)
 
         generator.noIdEntities.subscribeBy {
             Toast.makeText(activity, R.string.shuffle_no_id, Toast.LENGTH_SHORT).show()
-            diffUtilNoId(it)
+            setDiffUtilNoId(it)
         }.addTo(disposables)
     }
 
@@ -61,6 +61,16 @@ abstract class DiffUtilFragment : Fragment() {
         RxMenuItem.clicks(shuffleNoIdItem)
                 .subscribeBy { generator.generateNoId() }
                 .addTo(disposables)
+    }
+
+    private fun setDiffUtilId(entities: List<EntityId>) {
+        diffUtilNoId(emptyList())
+        diffUtilId(entities)
+    }
+
+    private fun setDiffUtilNoId(entities: List<EntityNoId>) {
+        diffUtilId(emptyList())
+        diffUtilNoId(entities)
     }
 
     protected abstract fun diffUtilId(entities: List<EntityId>)

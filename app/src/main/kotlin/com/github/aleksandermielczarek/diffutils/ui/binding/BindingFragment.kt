@@ -41,12 +41,10 @@ class BindingFragment : DiffUtilFragment() {
     }
 
     override fun diffUtilId(entities: List<EntityId>) {
-        noIdEntities.calculateDiff(emptyList())
         idEntities.update(entities)
     }
 
     override fun diffUtilNoId(entities: List<EntityNoId>) {
-        idEntities.update(emptyList())
         noIdEntities.update(entities)
     }
 }

@@ -37,8 +37,6 @@ class FastAdapterFragment : DiffUtilFragment() {
     }
 
     override fun diffUtilId(entities: List<EntityId>) {
-        entityNoIdAdapter.clear()
-
         val items = entities.map { EntityIdItem(it) }
         FastAdapterDiffUtil.set(entityIdAdapter, items,
                 object : DiffCallbackImpl<EntityIdItem>() {
@@ -47,8 +45,6 @@ class FastAdapterFragment : DiffUtilFragment() {
     }
 
     override fun diffUtilNoId(entities: List<EntityNoId>) {
-        entityIdAdapter.clear()
-
         val items = entities.map { EntityNoIdItem(it) }
         FastAdapterDiffUtil.set(entityNoIdAdapter, items,
                 object : DiffCallback<EntityNoIdItem> {
