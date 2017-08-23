@@ -10,7 +10,7 @@ import com.github.aleksandermielczarek.diffutils.R
 import com.github.aleksandermielczarek.diffutils.domain.EntityId
 import com.github.aleksandermielczarek.diffutils.domain.EntityNoId
 import com.github.aleksandermielczarek.diffutils.ui.DiffUtilFragment
-import kotlinx.android.synthetic.main.fragment_diff_util.view.*
+import kotlinx.android.synthetic.main.fragment_diff_util.*
 
 /**
  * Created by Aleksander Mielczarek on 22.08.2017.
@@ -26,11 +26,11 @@ class SdkFragment : DiffUtilFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.idEntities.adapter = entityIdAdapter
-        view.idEntities.layoutManager = LinearLayoutManager(activity)
+        idEntities.adapter = entityIdAdapter
+        idEntities.layoutManager = LinearLayoutManager(activity)
 
-        view.noIdEntities.adapter = entityNoIdAdapter
-        view.noIdEntities.layoutManager = LinearLayoutManager(activity)
+        noIdEntities.adapter = entityNoIdAdapter
+        noIdEntities.layoutManager = LinearLayoutManager(activity)
     }
 
     override fun diffUtilId(entities: List<EntityId>) {
@@ -74,5 +74,13 @@ class SdkFragment : DiffUtilFragment() {
         }, true)
         entityNoIdAdapter.noIdEntities = entities
         result.dispatchUpdatesTo(entityNoIdAdapter)
+    }
+
+    override fun changeIdEntitiesVisibility(visibility: Int) {
+        idEntities.visibility = visibility
+    }
+
+    override fun changeNoIdEntitiesVisibility(visibility: Int) {
+        noIdEntities.visibility = visibility
     }
 }

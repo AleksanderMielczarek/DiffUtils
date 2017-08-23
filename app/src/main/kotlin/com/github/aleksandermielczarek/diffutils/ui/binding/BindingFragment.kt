@@ -47,4 +47,12 @@ class BindingFragment : DiffUtilFragment() {
     override fun diffUtilNoId(entities: List<EntityNoId>) {
         noIdEntities.update(entities)
     }
+
+    override fun changeIdEntitiesVisibility(visibility: Int) {
+        binding.idEntities.visibility = visibility
+    }
+
+    override fun changeNoIdEntitiesVisibility(visibility: Int) {
+        binding.noIdEntities.visibility = visibility
+    }
 }

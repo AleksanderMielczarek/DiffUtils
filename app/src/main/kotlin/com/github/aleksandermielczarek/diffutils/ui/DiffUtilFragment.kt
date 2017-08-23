@@ -9,6 +9,7 @@ import android.support.v4.graphics.drawable.DrawableCompat
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import com.github.aleksandermielczarek.diffutils.R
 import com.github.aleksandermielczarek.diffutils.domain.EntityId
@@ -35,15 +36,8 @@ abstract class DiffUtilFragment : Fragment() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
 
-        generator.idEntities.subscribeBy {
-            Toast.makeText(activity, R.string.shuffle_id, Toast.LENGTH_SHORT).show()
-            setDiffUtilId(it)
-        }.addTo(disposables)
-
-        generator.noIdEntities.subscribeBy {
-            Toast.makeText(activity, R.string.shuffle_no_id, Toast.LENGTH_SHORT).show()
-            setDiffUtilNoId(it)
-        }.addTo(disposables)
+        generator.idEntities.subscribeBy { setDiffUtilId(it) }.addTo(disposables)
+        generator.noIdEntities.subscribeBy { setDiffUtilNoId(it) }.addTo(disposables)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -52,23 +46,25 @@ abstract class DiffUtilFragment : Fragment() {
 
         val shuffleIdItem = menu.findItem(R.id.action_shuffle_id)
         shuffleIdItem.tint(activity, R.color.colorWhite)
-        RxMenuItem.clicks(shuffleIdItem)
-                .subscribeBy { generator.generateId() }
-                .addTo(disposables)
+        RxMenuItem.clicks(shuffleIdItem).subscribeBy { generator.generateId() }.addTo(disposables)
 
         val shuffleNoIdItem = menu.findItem(R.id.action_shuffle_no_id)
         shuffleNoIdItem.tint(activity, R.color.colorWhite)
-        RxMenuItem.clicks(shuffleNoIdItem)
-                .subscribeBy { generator.generateNoId() }
-                .addTo(disposables)
+        RxMenuItem.clicks(shuffleNoIdItem).subscribeBy { generator.generateNoId() }.addTo(disposables)
     }
 
     private fun setDiffUtilId(entities: List<EntityId>) {
+        Toast.makeText(activity, R.string.shuffle_id, Toast.LENGTH_SHORT).show()
+        changeIdEntitiesVisibility(View.VISIBLE)
+        changeNoIdEntitiesVisibility(View.GONE)
         diffUtilNoId(emptyList())
         diffUtilId(entities)
     }
 
     private fun setDiffUtilNoId(entities: List<EntityNoId>) {
+        Toast.makeText(activity, R.string.shuffle_no_id, Toast.LENGTH_SHORT).show()
+        changeIdEntitiesVisibility(View.GONE)
+        changeNoIdEntitiesVisibility(View.VISIBLE)
         diffUtilId(emptyList())
         diffUtilNoId(entities)
     }
@@ -76,6 +72,10 @@ abstract class DiffUtilFragment : Fragment() {
     protected abstract fun diffUtilId(entities: List<EntityId>)
 
     protected abstract fun diffUtilNoId(entities: List<EntityNoId>)
+
+    protected abstract fun changeIdEntitiesVisibility(visibility: Int)
+
+    protected abstract fun changeNoIdEntitiesVisibility(visibility: Int)
 
     private fun MenuItem.tint(context: Context, @ColorRes color: Int) {
         val drawable = DrawableCompat.wrap(icon)
