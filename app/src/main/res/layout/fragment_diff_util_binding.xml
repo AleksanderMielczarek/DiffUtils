@@ -1,10 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/entities"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipToPadding="false"
-    android:paddingBottom="8dp"
-    android:paddingTop="8dp"
-    tools:listitem="@layout/item_entity" />
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers"/>
+
+        <variable
+            name="viewModel"
+            type="com.github.aleksandermielczarek.diffutils.ui.binding.BindingFragment"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/idEntities"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            app:itemBinding="@{viewModel.entityIdBinding}"
+            app:items="@{viewModel.idEntities}"
+            app:layoutManager="@{LayoutManagers.linear()}"
+            tools:listitem="@layout/item_entity"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/noIdEntities"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            app:itemBinding="@{viewModel.entityNoIdBinding}"
+            app:items="@{viewModel.noIdEntities}"
+            app:layoutManager="@{LayoutManagers.linear()}"
+            tools:listitem="@layout/item_entity"/>
+
+    </FrameLayout>
+
+</layout>

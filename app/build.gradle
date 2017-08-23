@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.getkeepsafe.dexcount'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion sdkVersion
@@ -67,6 +68,7 @@ dependencies {
         transitive = true
     }
     compile "com.mikepenz:fastadapter-commons:$fastadapterVersion"
+    kapt "com.android.databinding:compiler:$toolsVersion"
     compile "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:$bindingcollectionadapterVersion"
     compile "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:$bindingcollectionadapterVersion"
 }
