@@ -19,26 +19,21 @@ class Generator {
     val noIdEntities: Flowable<List<EntityNoId>> = entityNoIdProcessor.observeOn(AndroidSchedulers.mainThread())
 
     fun generateId() {
-        Completable.fromCallable {
-            val entities = Flowable.range(0, Random().nextInt(10) + 1)
-                    .map { EntityId(it, "Data$it", "Data$it", "Data$it") }
-                    .toList()
-                    .blockingGet()
-            Collections.shuffle(entities)
-            entityIdProcessor.onNext(entities)
-        }
-                .subscribeOn(Schedulers.io())
-                .subscribe()
+        generate(entityIdProcessor) { id, data -> EntityId(id, data, data, data) }
     }
 
     fun generateNoId() {
+        generate(entityNoIdProcessor) { _, data -> EntityNoId(data, data, data) }
+    }
+
+    private fun <T> generate(entityProcessor: FlowableProcessor<List<T>>, entity: (id: Int, data: String) -> T) {
         Completable.fromCallable {
             val entities = Flowable.range(0, Random().nextInt(10) + 1)
-                    .map { EntityNoId("Data$it", "Data$it", "Data$it") }
+                    .map { entity(it, "Data$it") }
                     .toList()
                     .blockingGet()
             Collections.shuffle(entities)
-            entityNoIdProcessor.onNext(entities)
+            entityProcessor.onNext(entities)
         }
                 .subscribeOn(Schedulers.io())
                 .subscribe()

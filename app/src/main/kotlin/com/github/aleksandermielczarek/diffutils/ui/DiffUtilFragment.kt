@@ -34,10 +34,12 @@ abstract class DiffUtilFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
         generator.idEntities.subscribeBy {
             Toast.makeText(activity, R.string.shuffle_id, Toast.LENGTH_SHORT).show()
             diffUtilId(it)
         }.addTo(disposables)
+
         generator.noIdEntities.subscribeBy {
             Toast.makeText(activity, R.string.shuffle_no_id, Toast.LENGTH_SHORT).show()
             diffUtilNoId(it)
@@ -47,11 +49,13 @@ abstract class DiffUtilFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_diff_util, menu)
+
         val shuffleIdItem = menu.findItem(R.id.action_shuffle_id)
         shuffleIdItem.tint(activity, R.color.colorWhite)
         RxMenuItem.clicks(shuffleIdItem)
                 .subscribeBy { generator.generateId() }
                 .addTo(disposables)
+
         val shuffleNoIdItem = menu.findItem(R.id.action_shuffle_no_id)
         shuffleNoIdItem.tint(activity, R.color.colorWhite)
         RxMenuItem.clicks(shuffleNoIdItem)

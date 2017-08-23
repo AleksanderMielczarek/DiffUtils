@@ -28,14 +28,17 @@ class FastAdapterFragment : DiffUtilFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         view.idEntities.adapter = entityIdAdapter
         view.idEntities.layoutManager = LinearLayoutManager(activity)
+
         view.noIdEntities.adapter = entityNoIdAdapter
         view.noIdEntities.layoutManager = LinearLayoutManager(activity)
     }
 
     override fun diffUtilId(entities: List<EntityId>) {
         entityNoIdAdapter.clear()
+
         val items = entities.map { EntityIdItem(it) }
         FastAdapterDiffUtil.set(entityIdAdapter, items,
                 object : DiffCallbackImpl<EntityIdItem>() {
@@ -45,6 +48,7 @@ class FastAdapterFragment : DiffUtilFragment() {
 
     override fun diffUtilNoId(entities: List<EntityNoId>) {
         entityIdAdapter.clear()
+
         val items = entities.map { EntityNoIdItem(it) }
         FastAdapterDiffUtil.set(entityNoIdAdapter, items,
                 object : DiffCallback<EntityNoIdItem> {
