@@ -36,7 +36,7 @@ ext {
     rxbindingVersion = '2.0.0'
 
     //utils
-    fastadapterVersion = '2.6.3@aar'
+    fastadapterVersion = '3.0.0.8-SNAPSHOT@aar'
     ankoVersion = '0.10.1'
     bindingcollectionadapterVersion = '2.1.0'
 }

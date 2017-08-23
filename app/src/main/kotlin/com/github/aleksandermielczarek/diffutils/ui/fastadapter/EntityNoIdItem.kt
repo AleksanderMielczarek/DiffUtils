@@ -5,13 +5,13 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.github.aleksandermielczarek.diffutils.R
 import com.github.aleksandermielczarek.diffutils.domain.EntityNoId
-import com.mikepenz.fastadapter.items.GenericAbstractItem
+import com.mikepenz.fastadapter.items.ModelAbstractItem
 import kotlinx.android.synthetic.main.item_entity.view.*
 
 /**
  * Created by Aleksander Mielczarek on 22.08.2017.
  */
-class EntityNoIdItem(model: EntityNoId) : GenericAbstractItem<EntityNoId, EntityNoIdItem, EntityNoIdItem.EntityItemViewHolder>(model) {
+class EntityNoIdItem(model: EntityNoId) : ModelAbstractItem<EntityNoId, EntityNoIdItem, EntityNoIdItem.EntityItemViewHolder>(model) {
 
     override fun getLayoutRes(): Int = R.layout.item_entity
 
